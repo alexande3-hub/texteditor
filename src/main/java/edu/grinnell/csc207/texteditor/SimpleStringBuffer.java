@@ -4,26 +4,36 @@ package edu.grinnell.csc207.texteditor;
  * A naive implementation of a text buffer using a <code>String</code>.
  */
 public class SimpleStringBuffer {
-    private String s;
-    private int index;
-    private int sz;
+    public String s;
+    public int index;
+    public int sz;
 
     SimpleStringBuffer() {
-        this.s = s;
-        this.index = index;
-        this.sz = sz;
+        this.s = " ";
+        this.index = 0;
+        this.sz = 0;
     }
-
+    /**
+     * 
+     * Adds a character into s on the cursor's current position, increasing the size by 1 and moving the cursor to the right.
+     * 
+     * @param ch the character we are inserting into the string.
+     */
     public void insert(char ch) {
-        s += " ";
+        this.s += " ";
         char[] sArray = s.toCharArray();
-        sz++;
-        for (int i = (sz - 1); i > index; i--) {
+        this.sz++;
+        for (int i = (sz - 1); i > this.index; i--) {
             sArray[i] = sArray[i - 1];
-        } sArray[index] = ch;
+        } sArray[this.index] = ch;
         s = sArray.toString();
+        moveRight();
     }
-
+    /** 
+     * 
+     * Deletes the character in s from the cursor's current position, decreasing the size by 1 and moving the cursor to the left when possible.
+     * 
+     */
     public void delete() {
         if (sz != 0) {
             char[] sArray = s.toCharArray();
@@ -32,36 +42,61 @@ public class SimpleStringBuffer {
             } s = sArray.toString();
             s = s.substring(0, (sz - 1));
             sz--;
+            moveLeft();
         }
     }
-
+    /**
+     * 
+     * Tells us what index position of s the cursor is currently on.
+     * 
+     * @return the current index position of the cursor.
+     */
     public int getCursorPosition() {
-        return index;
+        return this.index;
     }
 
+    /**
+     * 
+     * Moves the cursor to the right if possible on the string.
+     * 
+     */
     public void moveLeft() {
-        if (index > 0) {
-            index--;
+        if (this.index > 0) {
+            this.index--;
         }
     }
-
+    /**
+     * Moves the cursor to the left if possible on the string.
+     */
     public void moveRight() {
-        if (index < (sz - 1)) {
-            index++;
+        if (this.index < (sz - 1)) {
+            this.index++;
         }
     }
 
+    /**
+     * Gives us the current size of the string.
+     * @return the current size of the string.
+     */
     public int getSize() {
-        return sz;
+        return this.sz;
     }
 
+    /**
+     * Gives us the character from a specific index in the string.
+     * @param i the index from which we get our character from in the string.
+     * @return the character on index i.
+     */
     public char getChar(int i) {
         return s.toCharArray()[i];
     }
 
+    /**
+     * Returns a string giving the current status of the backing string, index, and size.
+     */
     @Override
     public String toString() {
-        String myString = "String = " + s + ", Index = " + index + ", Size = " + sz;
+        String myString = "String = " + this.s + ", Index = " + this.index + ", Size = " + this.sz;
         return myString;
     }
 }
