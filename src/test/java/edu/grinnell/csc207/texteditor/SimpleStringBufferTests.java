@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class SimpleStringBufferTests {
     @Test
     public void test1() {
-        SimpleStringBuffer b = new SimpleStringBuffer();
+        SimpleStringBuffer b = new SimpleStringBuffer(" ", 0, 0);
         b.insert('a');
         b.insert('b');
         b.insert('c');

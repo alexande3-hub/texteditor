@@ -4,15 +4,16 @@ package edu.grinnell.csc207.texteditor;
  * A naive implementation of a text buffer using a <code>String</code>.
  */
 public class SimpleStringBuffer {
-    public String s;
-    public int index;
-    public int sz;
+    public String s = "";
+    public int index = 0;
+    public int sz = 0;
 
-    SimpleStringBuffer() {
-        this.s = " ";
-        this.index = 0;
-        this.sz = 0;
+    SimpleStringBuffer(String s, int index, int sz) {
+        this.s = s;
+        this.index = index;
+        this.sz = sz;
     }
+    
     /**
      * 
      * Adds a character into s on the cursor's current position, increasing the size by 1 and moving the cursor to the right.
@@ -29,6 +30,7 @@ public class SimpleStringBuffer {
         s = sArray.toString();
         moveRight();
     }
+
     /** 
      * 
      * Deletes the character in s from the cursor's current position, decreasing the size by 1 and moving the cursor to the left when possible.
