@@ -3,13 +3,22 @@ package edu.grinnell.csc207.texteditor;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import com.googlecode.lanterna.screen.Screen;
+import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.input.KeyType;
 
 /**
  * The driver for the TextEditor Application.
  */
 public class TextEditor {
+
+    public static void drawBuffer(GapBuffer buf, Screen screen) throws IOException {
+        screen.refresh();
+    }
 
     /**
      * The main entry point for the TextEditor application.
@@ -24,6 +33,28 @@ public class TextEditor {
         // TODO: fill me in with a text editor TUI!
 
         Screen screen = new DefaultTerminalFactory().createScreen();
+        screen.startScreen();
+        Path path = Paths.get(args[0]);
+        char[] bc = {' ', ' ', ' ', ' '};
+        GapBuffer b = new GapBuffer(bc, 0, 3, 4);
+        TerminalPosition pos = new TerminalPosition(0, 0);
+        screen.setCursorPosition(pos);
+        boolean isRunning = true;
+        while (isRunning) {
+         KeyStroke stroke = screen.readInput();
+            if (stroke.getKeyType() == KeyType.ArrowLeft) {
+                b.moveLeft();
+            } else if (stroke.getKeyType() == KeyType.ArrowRight) {
+                b.moveRight();
+            } else if (stroke.getKeyType() == KeyType.Backspace) {
+                b.delete();
+            } else if (stroke.getKeyType() == KeyType.Character) {
+                b.insert(stroke.getCharacter());
+            } else if (stroke.getKeyType() == KeyType.Escape) {
+                isRunning = false;
+            } drawBuffer(b, screen);
+        }
+        screen.stopScreen();
         String path = args[0];
         System.out.format("Loading %s...\n", path);
     }
