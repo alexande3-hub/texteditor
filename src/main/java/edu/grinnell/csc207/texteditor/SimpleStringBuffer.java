@@ -22,12 +22,12 @@ public class SimpleStringBuffer {
      */
     public void insert(char ch) {
         this.s += " ";
-        char[] sArray = s.toCharArray();
+        char[] sArray = this.s.toCharArray();
         this.sz++;
         for (int i = (sz - 1); i > this.index; i--) {
             sArray[i] = sArray[i - 1];
         } sArray[this.index] = ch;
-        s = sArray.toString();
+        this.s = sArray.toString();
         moveRight();
     }
 
@@ -37,13 +37,13 @@ public class SimpleStringBuffer {
      * 
      */
     public void delete() {
-        if (sz != 0) {
-            char[] sArray = s.toCharArray();
+        if (this.sz != 0) {
+            char[] sArray = this.s.toCharArray();
             for (int i = index; i < (sz - 1); i++) {
                 sArray[i] = sArray[i + 1];
-            } s = sArray.toString();
-            s = s.substring(0, (sz - 1));
-            sz--;
+            } this.s = sArray.toString();
+            this.s = this.s.substring(0, (sz - 1));
+            this.sz--;
             moveLeft();
         }
     }
@@ -90,7 +90,7 @@ public class SimpleStringBuffer {
      * @return the character on index i.
      */
     public char getChar(int i) {
-        return s.toCharArray()[i];
+        return s.charAt(i);
     }
 
     /**

@@ -13,10 +13,26 @@ public class SimpleStringBufferTests {
         b.insert('b');
         b.insert('c');
         assertEquals(2, b.index);
-        assertEquals(3, b.sz);
+        assertEquals(3, b.getSize());
+        b.moveLeft();
+        b.delete();
+        assertEquals(0, b.getCursorPosition());
+        assertEquals(2, b.sz);
+    }
+
+    @Test
+    public void test2() {
+        SimpleStringBuffer b = new SimpleStringBuffer(" ", 0, 0);
+        b.delete();
+        b.moveLeft();
+        b.insert('a');
+        b.insert('b');
+        assertEquals(1, b.index);
+        assertEquals(2, b.sz);
         b.moveLeft();
         b.delete();
         assertEquals(0, b.index);
-        assertEquals(2, b.sz);
+        assertEquals(1, b.sz);
     }
+
 }
