@@ -34,7 +34,11 @@ public class TextEditor {
 
         Screen screen = new DefaultTerminalFactory().createScreen();
         screen.startScreen();
-        Path path = Paths.get(args[0]);
+
+        String path = args[0];
+        System.out.format("Loading %s...\n", path);
+
+        Path newPath = Paths.get(path);
         char[] bc = {' ', ' ', ' ', ' '};
         GapBuffer b = new GapBuffer(bc, 0, 3, 4);
         TerminalPosition pos = new TerminalPosition(0, 0);
@@ -55,7 +59,5 @@ public class TextEditor {
             } drawBuffer(b, screen);
         }
         screen.stopScreen();
-        String path = args[0];
-        System.out.format("Loading %s...\n", path);
     }
 }
