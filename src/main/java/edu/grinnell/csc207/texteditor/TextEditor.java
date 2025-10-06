@@ -40,23 +40,24 @@ public class TextEditor {
 
         Path newPath = Paths.get(path);
         char[] bc = {' ', ' ', ' ', ' '};
-        GapBuffer b = new GapBuffer(bc, 0, 3, 4);
+        GapBuffer buf = new GapBuffer(bc, 0, 3, 4);
+
         TerminalPosition pos = new TerminalPosition(0, 0);
         screen.setCursorPosition(pos);
         boolean isRunning = true;
         while (isRunning) {
          KeyStroke stroke = screen.readInput();
             if (stroke.getKeyType() == KeyType.ArrowLeft) {
-                b.moveLeft();
+                buf.moveLeft();
             } else if (stroke.getKeyType() == KeyType.ArrowRight) {
-                b.moveRight();
+                buf.moveRight();
             } else if (stroke.getKeyType() == KeyType.Backspace) {
-                b.delete();
+                buf.delete();
             } else if (stroke.getKeyType() == KeyType.Character) {
-                b.insert(stroke.getCharacter());
+                buf.insert(stroke.getCharacter());
             } else if (stroke.getKeyType() == KeyType.Escape) {
                 isRunning = false;
-            } drawBuffer(b, screen);
+            } drawBuffer(buf, screen);
         }
         screen.stopScreen();
     }
