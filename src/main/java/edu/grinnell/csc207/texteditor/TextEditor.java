@@ -3,11 +3,13 @@ package edu.grinnell.csc207.texteditor;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
@@ -17,6 +19,11 @@ import com.googlecode.lanterna.input.KeyType;
 public class TextEditor {
 
     public static void drawBuffer(GapBuffer buf, Screen screen) throws IOException {
+        String st = buf.b.toString();
+        for (int i = 0; i < buf.sz; i++) {
+            // TextCharacter c = TextCharacter.fromCharacter(buf.b.i);
+            // screen.setCharacter(i, 0, c);
+        }
         screen.refresh();
     }
 
@@ -30,8 +37,6 @@ public class TextEditor {
             System.exit(1);
         }
 
-        // TODO: fill me in with a text editor TUI!
-
         Screen screen = new DefaultTerminalFactory().createScreen();
         screen.startScreen();
 
@@ -41,7 +46,6 @@ public class TextEditor {
         Path newPath = Paths.get(path);
         char[] bc = {' ', ' ', ' ', ' '};
         GapBuffer buf = new GapBuffer(bc, 0, 3, 4);
-
         TerminalPosition pos = new TerminalPosition(0, 0);
         screen.setCursorPosition(pos);
         boolean isRunning = true;
@@ -60,5 +64,8 @@ public class TextEditor {
             } drawBuffer(buf, screen);
         }
         screen.stopScreen();
+        if (Files.exists(newPath) && Files.isRegularFile(newPath)) {
+            Files.writeString(newPath, buf.b.toString());
+        }
     }
 }

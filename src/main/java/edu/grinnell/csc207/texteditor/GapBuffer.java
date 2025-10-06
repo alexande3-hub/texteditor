@@ -1,5 +1,7 @@
 package edu.grinnell.csc207.texteditor;
 
+import java.util.Arrays;
+
 /**
  * A gap buffer-based implementation of a text buffer.
  */
@@ -21,11 +23,15 @@ public class GapBuffer {
      */
     private void ensureCapacity() {
         if (arrow1 == arrow2) {
-            String bString = this.b.toString();
-            String newString = bString.substring(0, arrow1) + "    " + bString.substring(arrow1, sz);
-            b = newString.toCharArray();
+            b = Arrays.copyOf(b, sz + 4);
             this.arrow2 += 4;
             this.sz += 4;
+            for (int i = arrow2; i < sz; i++) {
+                b[i] = b[i - 4];
+            }
+            for (int i = arrow1; i < arrow2; i++) {
+                b[i] = ' ';
+            }
         }
     }
 

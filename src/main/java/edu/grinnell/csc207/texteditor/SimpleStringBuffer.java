@@ -1,5 +1,7 @@
 package edu.grinnell.csc207.texteditor;
 
+import java.util.Arrays;
+
 /**
  * A naive implementation of a text buffer using a <code>String</code>.
  */
@@ -21,8 +23,13 @@ public class SimpleStringBuffer {
      * @param ch the character we are inserting into the string.
      */
     public void insert(char ch) {
-        this.s += " ";
         char[] sArray = this.s.toCharArray();
+        if (sArray == null) {
+            char[] newArray = {' '};
+            sArray = newArray;
+        } else {
+            sArray = Arrays.copyOf(sArray, sz + 1);
+        }
         this.sz++;
         for (int i = (sz - 1); i > this.index; i--) {
             sArray[i] = sArray[i - 1];

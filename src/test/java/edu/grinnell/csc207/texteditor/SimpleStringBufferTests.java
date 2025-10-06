@@ -35,4 +35,11 @@ public class SimpleStringBufferTests {
         assertEquals(1, b.sz);
     }
 
+    @Test
+    public void test3() {
+        SimpleStringBuffer b = new SimpleStringBuffer(" ", 0, 0);
+        b.insert('a');
+        assertEquals('a', b.getChar(0));
+    }
+
 }
