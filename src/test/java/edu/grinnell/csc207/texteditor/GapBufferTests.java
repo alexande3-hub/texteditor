@@ -36,4 +36,17 @@ public class GapBufferTests {
         assertEquals(0, b.arrow1);
         assertEquals(4, b.sz);
     }
+
+    @Test
+    public void test3() {
+        char[] bc = {' ', ' ', ' ', ' '};
+        GapBuffer b = new GapBuffer(bc, 0, 3, 4);
+        b.insert('a');
+        b.insert('b');
+        b.moveLeft();
+        b.insert('c');
+        assertEquals('c', b.getChar(1));
+        assertEquals(' ', b.getChar(6));
+        assertEquals('b', b.getChar(7));
+    }
 }

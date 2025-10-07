@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class SimpleStringBufferTests {
     @Test
     public void test1() {
-        SimpleStringBuffer b = new SimpleStringBuffer(" ", 0, 0);
+        SimpleStringBuffer b = new SimpleStringBuffer("", 0, 0);
         b.insert('a');
         b.insert('b');
         b.insert('c');
@@ -22,7 +22,7 @@ public class SimpleStringBufferTests {
 
     @Test
     public void test2() {
-        SimpleStringBuffer b = new SimpleStringBuffer(" ", 0, 0);
+        SimpleStringBuffer b = new SimpleStringBuffer("", 0, 0);
         b.delete();
         b.moveLeft();
         b.insert('a');
@@ -37,9 +37,13 @@ public class SimpleStringBufferTests {
 
     @Test
     public void test3() {
-        SimpleStringBuffer b = new SimpleStringBuffer(" ", 0, 0);
+        SimpleStringBuffer b = new SimpleStringBuffer("", 0, 0);
         b.insert('a');
         assertEquals('a', b.getChar(0));
+        b.insert('b');
+        assertEquals('b', b.getChar(1));
+        b.insert('c');
+        assertEquals('c', b.getChar(2));
     }
 
 }

@@ -24,16 +24,16 @@ public class SimpleStringBuffer {
      */
     public void insert(char ch) {
         char[] sArray = this.s.toCharArray();
+        this.sz++;
         if (sArray == null) {
-            char[] newArray = {' '};
+            char[] newArray = {ch};
             sArray = newArray;
         } else {
-            sArray = Arrays.copyOf(sArray, sz + 1);
+            sArray = Arrays.copyOf(sArray, sz);
+            for (int i = (sz - 1); i > this.index; i--) {
+                sArray[i] = sArray[i - 1];
+            } sArray[this.index] = ch;
         }
-        this.sz++;
-        for (int i = (sz - 1); i > this.index; i--) {
-            sArray[i] = sArray[i - 1];
-        } sArray[this.index] = ch;
         this.s = sArray.toString();
         moveRight();
     }
@@ -66,7 +66,7 @@ public class SimpleStringBuffer {
 
     /**
      * 
-     * Moves the cursor to the right if possible on the string.
+     * Moves the cursor to the left if possible on the string.
      * 
      */
     public void moveLeft() {
@@ -75,7 +75,7 @@ public class SimpleStringBuffer {
         }
     }
     /**
-     * Moves the cursor to the left if possible on the string.
+     * Moves the cursor to the right if possible on the string.
      */
     public void moveRight() {
         if (this.index < (sz - 1)) {
@@ -108,4 +108,6 @@ public class SimpleStringBuffer {
         String myString = "String = " + this.s + ", Index = " + this.index + ", Size = " + this.sz;
         return myString;
     }
+
+
 }
