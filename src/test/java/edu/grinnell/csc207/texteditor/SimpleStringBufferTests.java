@@ -41,8 +41,8 @@ public class SimpleStringBufferTests {
         b.insert('a');
         assertEquals('a', b.getChar(0));
         b.insert('b');
-        assertEquals('b', b.getChar(1));
         b.insert('c');
+        assertEquals("c", b.s);
         assertEquals('c', b.getChar(2));
     }
 

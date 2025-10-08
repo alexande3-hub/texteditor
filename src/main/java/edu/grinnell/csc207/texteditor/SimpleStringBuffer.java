@@ -34,7 +34,7 @@ public class SimpleStringBuffer {
                 sArray[i] = sArray[i - 1];
             } sArray[this.index] = ch;
         }
-        this.s = sArray.toString();
+        this.s = String.valueOf(sArray);
         moveRight();
     }
 

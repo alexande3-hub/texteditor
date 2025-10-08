@@ -20,8 +20,10 @@ public class TextEditor {
 
     public static void drawBuffer(GapBuffer buf, Screen screen) throws IOException {
         for (int i = 0; i < buf.sz; i++) {
-            TextCharacter[] temp = TextCharacter.fromCharacter(buf.getChar(i));
-            screen.setCharacter(i, 0, temp[0]);
+            if (i < buf.arrow1 || i >= buf.arrow2) {
+                TextCharacter[] temp = TextCharacter.fromCharacter(buf.getChar(i));
+                screen.setCharacter(i, 0, temp[0]);
+            }
         }
         screen.refresh();
     }
@@ -63,8 +65,6 @@ public class TextEditor {
             } drawBuffer(buf, screen);
         }
         screen.stopScreen();
-        if (Files.exists(newPath) && Files.isRegularFile(newPath)) {
-            Files.writeString(newPath, buf.b.toString());
-        }
+        Files.writeString(newPath, buf.b.toString());
     }
 }
