@@ -19,10 +19,9 @@ import com.googlecode.lanterna.input.KeyType;
 public class TextEditor {
 
     public static void drawBuffer(GapBuffer buf, Screen screen) throws IOException {
-        String st = buf.b.toString();
         for (int i = 0; i < buf.sz; i++) {
-            TextCharacter c = TextCharacter.fromCharacter(buf.getChar(i));
-            screen.setCharacter(i, 0, c);
+            TextCharacter[] temp = TextCharacter.fromCharacter(buf.getChar(i));
+            screen.setCharacter(i, 0, temp[0]);
         }
         screen.refresh();
     }
