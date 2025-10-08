@@ -78,7 +78,7 @@ public class GapBuffer {
      */
     public void moveLeft() {
         if (this.arrow1 > 0) {
-            b[arrow2] = b[arrow1 - 1];
+            b[arrow2 - 1] = b[arrow1 - 1];
             b[arrow1 - 1] = ' ';
             this.arrow1--;
             this.arrow2--;
@@ -90,7 +90,7 @@ public class GapBuffer {
      */
     public void moveRight() {
         if (this.arrow2 < (sz - 1)) {
-            b[arrow1 - 1] = b[arrow2];
+            b[arrow1] = b[arrow2];
             b[arrow2] = ' ';
             this.arrow1++;
             this.arrow2++;
@@ -118,7 +118,6 @@ public class GapBuffer {
      * Returns a string giving the current status of the backing string, arrow positions, and size.
      */
     public String toString() {
-        String myString = "String representation of buffer b = " + this.b.toString() + ", Gap starting point = " + arrow1 + ", Gap ending point = " + arrow2 + ", Size = " + this.sz;
-        return myString;
+        return String.valueOf(b);
     }
 }

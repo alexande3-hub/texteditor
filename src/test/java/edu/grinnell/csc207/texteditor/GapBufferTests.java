@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import net.jqwik.api.ForAll;
+import net.jqwik.api.Property;
+import net.jqwik.api.constraints.IntRange;
+
 public class GapBufferTests {
     @Test
     public void test1() {
@@ -43,10 +47,63 @@ public class GapBufferTests {
         GapBuffer b = new GapBuffer(bc, 0, 3, 4);
         b.insert('a');
         b.insert('b');
+        assertEquals('a', b.getChar(0));
+        assertEquals('b', b.getChar(1));
+        assertEquals(' ', b.getChar(2));
+        assertEquals(' ', b.getChar(3));
         b.moveLeft();
+        assertEquals('a', b.getChar(0));
+        assertEquals(' ', b.getChar(1));
+        assertEquals('b', b.getChar(2));
+        assertEquals(' ', b.getChar(3));
         b.insert('c');
         assertEquals('c', b.getChar(1));
-        assertEquals(' ', b.getChar(6));
-        assertEquals('b', b.getChar(7));
+        assertEquals(' ', b.getChar(2));
+        assertEquals(' ', b.getChar(3));
+        assertEquals(' ', b.getChar(4));
+        assertEquals(' ', b.getChar(5));
+        assertEquals('b', b.getChar(6));
+        assertEquals(' ', b.getChar(7));
+    }
+
+    @Test
+    public void test4() {
+        char[] bc = {' ', ' ', ' ', ' '};
+        GapBuffer b = new GapBuffer(bc, 0, 3, 4);
+        b.insert('a');
+        assertEquals('a', b.getChar(0));
+        b.insert('b');
+        b.insert('c');
+        b.insert('d');
+        b.moveLeft();
+        assertEquals(3, b.arrow1);
+        assertEquals(6, b.arrow2);
+        assertEquals('d', b.getChar(6));
+        b.moveRight();
+        assertEquals(4, b.arrow1);
+        assertEquals(7, b.arrow2);
+        b.moveLeft();
+        b.delete();
+        assertEquals("ab    d ", b.toString());
+    }
+
+    @Property
+    public boolean ArrowTest(@ForAll @IntRange(min = 0, max = 1000) int sz) {
+        char[] bc = {' ', ' ', ' ', ' '};
+        GapBuffer b = new GapBuffer(bc, 0, 3, 4);
+        int ArrowSum = 0;
+        b.insert('a');
+        ArrowSum += b.arrow1;
+        b.insert('b');
+        ArrowSum += b.arrow1;
+        b.insert('c');
+        ArrowSum += b.arrow1;
+        b.moveLeft();
+        ArrowSum += b.arrow1;
+        ArrowSum += b.arrow2;
+        b.moveRight();
+        ArrowSum += b.arrow1;
+        ArrowSum += b.arrow2;
+        return ArrowSum == 24;
     }
 }

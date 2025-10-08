@@ -19,11 +19,14 @@ import com.googlecode.lanterna.input.KeyType;
 public class TextEditor {
 
     public static void drawBuffer(GapBuffer buf, Screen screen) throws IOException {
+        screen.clear();
         for (int i = 0; i < buf.sz; i++) {
             if (i < buf.arrow1 || i >= buf.arrow2) {
                 TextCharacter[] temp = TextCharacter.fromCharacter(buf.getChar(i));
                 screen.setCharacter(i, 0, temp[0]);
             }
+            TerminalPosition pos = new TerminalPosition(buf.arrow1, 0);
+            screen.setCursorPosition(pos);
         }
         screen.refresh();
     }
@@ -47,8 +50,6 @@ public class TextEditor {
         Path newPath = Paths.get(path);
         char[] bc = {' ', ' ', ' ', ' '};
         GapBuffer buf = new GapBuffer(bc, 0, 3, 4);
-        TerminalPosition pos = new TerminalPosition(0, 0);
-        screen.setCursorPosition(pos);
         boolean isRunning = true;
         while (isRunning) {
          KeyStroke stroke = screen.readInput();
@@ -62,7 +63,8 @@ public class TextEditor {
                 buf.insert(stroke.getCharacter());
             } else if (stroke.getKeyType() == KeyType.Escape) {
                 isRunning = false;
-            } drawBuffer(buf, screen);
+            }
+            drawBuffer(buf, screen);
         }
         screen.stopScreen();
         Files.writeString(newPath, buf.b.toString());

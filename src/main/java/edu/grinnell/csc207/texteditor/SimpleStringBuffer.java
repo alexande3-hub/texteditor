@@ -33,8 +33,7 @@ public class SimpleStringBuffer {
             for (int i = (sz - 1); i > this.index; i--) {
                 sArray[i] = sArray[i - 1];
             } sArray[this.index] = ch;
-        }
-        this.s = String.valueOf(sArray);
+        } this.s = String.valueOf(sArray);
         moveRight();
     }
 
@@ -46,9 +45,9 @@ public class SimpleStringBuffer {
     public void delete() {
         if (this.sz != 0) {
             char[] sArray = this.s.toCharArray();
-            for (int i = index; i < (sz - 1); i++) {
+            for (int i = (index - 1); i < (sz - 1); i++) {
                 sArray[i] = sArray[i + 1];
-            } this.s = sArray.toString();
+            } this.s = String.valueOf(sArray);
             this.s = this.s.substring(0, (sz - 1));
             this.sz--;
             moveLeft();
@@ -78,7 +77,7 @@ public class SimpleStringBuffer {
      * Moves the cursor to the right if possible on the string.
      */
     public void moveRight() {
-        if (this.index < (sz - 1)) {
+        if (this.index < sz) {
             this.index++;
         }
     }
@@ -101,12 +100,12 @@ public class SimpleStringBuffer {
     }
 
     /**
-     * Returns a string giving the current status of the backing string, index, and size.
+     * Returns a string giving the current status of the buffer.
+     * @return the current buffer.
      */
     @Override
     public String toString() {
-        String myString = "String = " + this.s + ", Index = " + this.index + ", Size = " + this.sz;
-        return myString;
+        return s;
     }
 
 
