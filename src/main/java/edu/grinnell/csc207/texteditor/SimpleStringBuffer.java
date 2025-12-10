@@ -10,7 +10,7 @@ public class SimpleStringBuffer {
     public int index = 0;
     public int sz = 0;
 
-    SimpleStringBuffer() {
+    public SimpleStringBuffer() {
         this.s = "";
         this.index = 0;
         this.sz = 0;
@@ -31,7 +31,8 @@ public class SimpleStringBuffer {
             for (int i = (sz - 1); i > this.index; i--) {
                 sArray[i] = sArray[i - 1];
             } sArray[this.index] = ch;
-        } this.s = String.valueOf(sArray);
+        } 
+        this.s = String.valueOf(sArray);
         moveRight();
     }
 

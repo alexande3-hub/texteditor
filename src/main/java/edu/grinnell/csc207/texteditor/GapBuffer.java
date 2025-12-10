@@ -11,7 +11,7 @@ public class GapBuffer {
     public int arrow2 = 3;
     public int sz = 4;
 
-    GapBuffer() {
+    public GapBuffer() {
         this.arrow1 = 0;
         this.arrow2 = 3;
         this.sz = 4;
@@ -107,6 +107,7 @@ public class GapBuffer {
 
     /**
      * Returns a string giving the current status of the backing string, arrow positions, and size.
+     * @String the string returned that holds the data.
      */
     public String toString() {
         return String.valueOf(b);

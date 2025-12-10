@@ -18,6 +18,12 @@ import com.googlecode.lanterna.input.KeyType;
  */
 public class TextEditor {
 
+    /**
+     * Renders entire buffer to the given screen.
+     * @param buf the buffer that is rendered.
+     * @param screen the screen that the buffer renders to.
+     * @throws IOException 
+     */
     public static void drawBuffer(GapBuffer buf, Screen screen) throws IOException {
         screen.clear();
         for (int i = 0; i < buf.sz; i++) {
@@ -34,6 +40,7 @@ public class TextEditor {
     /**
      * The main entry point for the TextEditor application.
      * @param args command-line arguments.
+     * @throws IOException
      */
     public static void main(String[] args) throws IOException {
         if (args.length != 1) {
@@ -51,7 +58,7 @@ public class TextEditor {
         GapBuffer buf = new GapBuffer();
         boolean isRunning = true;
         while (isRunning) {
-         KeyStroke stroke = screen.readInput();
+            KeyStroke stroke = screen.readInput();
             if (stroke.getKeyType() == KeyType.ArrowLeft) {
                 buf.moveLeft();
             } else if (stroke.getKeyType() == KeyType.ArrowRight) {

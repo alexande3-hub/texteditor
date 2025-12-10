@@ -23,6 +23,15 @@ https://docs.oracle.com/javase/8/docs/api/java/lang/String.html
 
 # Added more Oracle-related acknowledgements.
 
+# Made constructors for GapBuffer and SimpleStringBuffer public.
+
+# Fixed an error where a curly bracket should have been alone on a line.
+
+# Fixed an indenting error for a while loop in TextEditor.
+
+# Added missing documentation for drawBuffer.
+
+# Added missing return statement in the toString method in GapBuffer.
 
 
 Simple String Buffer Analysis (insert function):
