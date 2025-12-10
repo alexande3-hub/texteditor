@@ -10,6 +10,7 @@ public class GapBuffer {
     public int arrow1 = 0;
     public int arrow2 = 0;
     public int sz = 0;
+    public int bufLength = 0;
 
     /**
      * A constructor for the GapBuffer.
@@ -18,6 +19,7 @@ public class GapBuffer {
         this.arrow1 = 0;
         this.arrow2 = 0;
         this.sz = 0;
+        this.bufLength = 0;
     }
 
     /**
@@ -25,23 +27,23 @@ public class GapBuffer {
      */
     private void ensureCapacity() {
         if (arrow1 == arrow2) {
-            b = Arrays.copyOf(b, sz + 4);
-            if (arrow1 == 0 && sz == 0) {
+            b = Arrays.copyOf(b, bufLength + 4);
+            if (arrow1 == 0 && bufLength == 0) {
                 arrow2 = 3;
+                bufLength = 4;
                 b[0] = ' ';
                 b[1] = ' ';
                 b[2] = ' ';
                 b[3] = ' ';
             } else {
                 this.arrow2 += 4;
-                this.sz += 4;
-                for (int i = arrow2; i < sz; i++) {
+                this.bufLength += 4;
+                for (int i = arrow2; i < bufLength; i++) {
                     b[i] = b[i - 4];
                 }
                 for (int i = arrow1; i < arrow2; i++) {
                     b[i] = ' ';
                 }
-                this.sz -= 4;
             }
         }
     }
@@ -66,6 +68,7 @@ public class GapBuffer {
         if (arrow1 != 0) {
             b[arrow1 - 1] = ' ';
             arrow1--;
+            sz--;
         }
     }
 
@@ -95,7 +98,7 @@ public class GapBuffer {
      * Moves the cursor to the left if possible on the array.
      */
     public void moveRight() {
-        if (this.arrow2 < (sz - 1)) {
+        if (this.arrow2 < (bufLength - 1)) {
             b[arrow1] = b[arrow2];
             b[arrow2] = ' ';
             this.arrow1++;

@@ -16,12 +16,12 @@ public class GapBufferTests {
         b.insert('b');
         b.insert('c');
         assertEquals(3, b.getCursorPosition());
-        assertEquals(8, b.sz);
+        assertEquals(3, b.sz);
         b.moveLeft();
         b.delete();
         assertEquals(1, b.arrow1);
         assertEquals(6, b.arrow2);
-        assertEquals(8, b.getSize());
+        assertEquals(2, b.getSize());
     }
 
     @Test
@@ -32,12 +32,12 @@ public class GapBufferTests {
         b.insert('a');
         b.insert('b');
         assertEquals(2, b.arrow1);
-        assertEquals(4, b.sz);
+        assertEquals(2, b.sz);
         b.moveLeft();
         b.delete();
         assertEquals(2, b.arrow2);
         assertEquals(0, b.arrow1);
-        assertEquals(4, b.sz);
+        assertEquals(1, b.sz);
     }
 
     @Test
@@ -61,7 +61,6 @@ public class GapBufferTests {
         assertEquals(' ', b.getChar(4));
         assertEquals(' ', b.getChar(5));
         assertEquals('b', b.getChar(6));
-        assertEquals(' ', b.getChar(7));
     }
 
     @Test
