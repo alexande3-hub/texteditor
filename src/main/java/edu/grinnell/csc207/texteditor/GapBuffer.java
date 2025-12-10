@@ -28,7 +28,6 @@ public class GapBuffer {
             b = Arrays.copyOf(b, sz + 4);
             if (arrow1 == 0 && sz == 0) {
                 arrow2 = 3;
-                sz = 4;
                 b[0] = ' ';
                 b[1] = ' ';
                 b[2] = ' ';
@@ -42,6 +41,7 @@ public class GapBuffer {
                 for (int i = arrow1; i < arrow2; i++) {
                     b[i] = ' ';
                 }
+                this.sz -= 4;
             }
         }
     }
@@ -55,6 +55,7 @@ public class GapBuffer {
         ensureCapacity();
         b[arrow1] = ch;
         arrow1++;
+        sz++;
         ensureCapacity();
     }
 
