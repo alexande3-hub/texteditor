@@ -10,6 +10,9 @@ public class SimpleStringBuffer {
     public int index = 0;
     public int sz = 0;
 
+    /**
+     * A constructor for the SimpleStringBuffer.
+     */
     public SimpleStringBuffer() {
         this.s = "";
         this.index = 0;
@@ -50,6 +53,7 @@ public class SimpleStringBuffer {
             moveLeft();
         }
     }
+    
     /**
      * Tells us what index position of s the cursor is currently on.
      * @return the current index position of the cursor.

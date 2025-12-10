@@ -6,15 +6,18 @@ import java.util.Arrays;
  * A gap buffer-based implementation of a text buffer.
  */
 public class GapBuffer {
-    public char[] b = {' ', ' ', ' ', ' '};
+    public char[] b = {};
     public int arrow1 = 0;
-    public int arrow2 = 3;
-    public int sz = 4;
+    public int arrow2 = 0;
+    public int sz = 0;
 
+    /**
+     * A constructor for the GapBuffer.
+     */
     public GapBuffer() {
         this.arrow1 = 0;
-        this.arrow2 = 3;
-        this.sz = 4;
+        this.arrow2 = 0;
+        this.sz = 0;
     }
 
     /**
@@ -23,13 +26,22 @@ public class GapBuffer {
     private void ensureCapacity() {
         if (arrow1 == arrow2) {
             b = Arrays.copyOf(b, sz + 4);
-            this.arrow2 += 4;
-            this.sz += 4;
-            for (int i = arrow2; i < sz; i++) {
-                b[i] = b[i - 4];
-            }
-            for (int i = arrow1; i < arrow2; i++) {
-                b[i] = ' ';
+            if (arrow1 == 0 && sz == 0) {
+                arrow2 = 3;
+                sz = 4;
+                b[0] = ' ';
+                b[1] = ' ';
+                b[2] = ' ';
+                b[3] = ' ';
+            } else {
+                this.arrow2 += 4;
+                this.sz += 4;
+                for (int i = arrow2; i < sz; i++) {
+                    b[i] = b[i - 4];
+                }
+                for (int i = arrow1; i < arrow2; i++) {
+                    b[i] = ' ';
+                }
             }
         }
     }
@@ -40,6 +52,7 @@ public class GapBuffer {
      * @param ch the character we are inserting into the array.
      */
     public void insert(char ch) {
+        ensureCapacity();
         b[arrow1] = ch;
         arrow1++;
         ensureCapacity();
@@ -60,7 +73,7 @@ public class GapBuffer {
      * @return the current index position of the cursor (arrow2).
      */
     public int getCursorPosition() {
-        return this.arrow2;
+        return this.arrow1;
     }
 
 
@@ -75,6 +88,7 @@ public class GapBuffer {
             this.arrow2--;
         }
     }
+
 
     /**
      * Moves the cursor to the left if possible on the array.
@@ -107,7 +121,7 @@ public class GapBuffer {
 
     /**
      * Returns a string giving the current status of the backing string, arrow positions, and size.
-     * @String the string returned that holds the data.
+     * @return the string returned that holds the data.
      */
     public String toString() {
         return String.valueOf(b);
