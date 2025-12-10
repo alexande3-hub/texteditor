@@ -48,8 +48,7 @@ public class TextEditor {
         System.out.format("Loading %s...\n", path);
 
         Path newPath = Paths.get(path);
-        char[] bc = {' ', ' ', ' ', ' '};
-        GapBuffer buf = new GapBuffer(bc, 0, 3, 4);
+        GapBuffer buf = new GapBuffer();
         boolean isRunning = true;
         while (isRunning) {
          KeyStroke stroke = screen.readInput();

@@ -10,16 +10,14 @@ public class SimpleStringBuffer {
     public int index = 0;
     public int sz = 0;
 
-    SimpleStringBuffer(String s, int index, int sz) {
-        this.s = s;
-        this.index = index;
-        this.sz = sz;
+    SimpleStringBuffer() {
+        this.s = "";
+        this.index = 0;
+        this.sz = 0;
     }
     
     /**
-     * 
-     * Adds a character into s on the cursor's current position, increasing the size by 1 and moving the cursor to the right.
-     * 
+     * Adds a character into s on the cursor's current position.
      * @param ch the character we are inserting into the string.
      */
     public void insert(char ch) {
@@ -38,9 +36,7 @@ public class SimpleStringBuffer {
     }
 
     /** 
-     * 
-     * Deletes the character in s from the cursor's current position, decreasing the size by 1 and moving the cursor to the left when possible.
-     * 
+     * Deletes the character in s from the cursor's current position.
      */
     public void delete() {
         if (this.sz != 0) {
@@ -54,9 +50,7 @@ public class SimpleStringBuffer {
         }
     }
     /**
-     * 
      * Tells us what index position of s the cursor is currently on.
-     * 
      * @return the current index position of the cursor.
      */
     public int getCursorPosition() {
@@ -64,9 +58,7 @@ public class SimpleStringBuffer {
     }
 
     /**
-     * 
      * Moves the cursor to the left if possible on the string.
-     * 
      */
     public void moveLeft() {
         if (this.index > 0) {

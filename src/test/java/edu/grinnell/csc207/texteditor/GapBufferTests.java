@@ -11,8 +11,7 @@ import net.jqwik.api.constraints.IntRange;
 public class GapBufferTests {
     @Test
     public void test1() {
-        char[] bc = {' ', ' ', ' ', ' '};
-        GapBuffer b = new GapBuffer(bc, 0, 3, 4);
+        GapBuffer b = new GapBuffer();
         b.insert('a');
         b.insert('b');
         b.insert('c');
@@ -26,8 +25,7 @@ public class GapBufferTests {
 
     @Test
     public void test2() {
-        char[] bc = {' ', ' ', ' ', ' '};
-        GapBuffer b = new GapBuffer(bc, 0, 3, 4);
+        GapBuffer b = new GapBuffer();
         b.delete();
         b.moveLeft();
         b.insert('a');
@@ -43,8 +41,7 @@ public class GapBufferTests {
 
     @Test
     public void test3() {
-        char[] bc = {' ', ' ', ' ', ' '};
-        GapBuffer b = new GapBuffer(bc, 0, 3, 4);
+        GapBuffer b = new GapBuffer();
         b.insert('a');
         b.insert('b');
         assertEquals('a', b.getChar(0));
@@ -68,8 +65,7 @@ public class GapBufferTests {
 
     @Test
     public void test4() {
-        char[] bc = {' ', ' ', ' ', ' '};
-        GapBuffer b = new GapBuffer(bc, 0, 3, 4);
+        GapBuffer b = new GapBuffer();
         b.insert('a');
         assertEquals('a', b.getChar(0));
         b.insert('b');
@@ -89,8 +85,7 @@ public class GapBufferTests {
 
     @Property
     public boolean ArrowTest(@ForAll @IntRange(min = 0, max = 1000) int sz) {
-        char[] bc = {' ', ' ', ' ', ' '};
-        GapBuffer b = new GapBuffer(bc, 0, 3, 4);
+        GapBuffer b = new GapBuffer();
         int ArrowSum = 0;
         b.insert('a');
         ArrowSum += b.arrow1;

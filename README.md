@@ -3,7 +3,9 @@
 **Author**: Isaac Alexander
 
 ## Resources Used
-
++ asciitable.com
++ javac 24.0.2
++ Oracle JDK
 + Charlotte, Ben, and Candice (tutors) helped with this project.
 + Z (peer) helped with this project (conceptual Java questions).
 + Osera and course mentor David helped with this project.
@@ -13,29 +15,13 @@ https://docs.oracle.com/javase/8/docs/api/java/lang/String.html
 
 ## Changelog
 
-# Starting the string buffer process.
+# Fixed comments that were either too long or had blank lines.
 
-# Made my first test and added string buffer comments.
+# Changed the constructor of SimpleStringBuffer so it doesn't take any parameters.
 
-# Beginning my README question 2 answer.
+# Changed the constructor of GapBuffer so it doesn't take any parameters.
 
-# Finished the gap buffer implementation!
-
-# Working on the tests, finished part 2!
-
-# Making great progress on the main function!
-
-# Fixed a path issue (probably)
-
-# Just need to figure out what's wrong with the getChar function in SSB… 
-
-# Working on array non-pointer madnessmvn test
-
-# These errors are beginning to drive me up a wall.
-
-# Home stretch hopefully, fixed text character deal!
-
-# Got most of the test fixed
+# Added more Oracle-related acknowledgements.
 
 
 

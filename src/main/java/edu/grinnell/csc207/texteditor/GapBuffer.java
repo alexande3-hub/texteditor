@@ -11,15 +11,14 @@ public class GapBuffer {
     public int arrow2 = 3;
     public int sz = 4;
 
-    GapBuffer(char[] b, int arrow1, int arrow2, int sz) {
-        this.b = b;
-        this.arrow1 = arrow1;
-        this.arrow2 = arrow2;
-        this.sz = sz;
+    GapBuffer() {
+        this.arrow1 = 0;
+        this.arrow2 = 3;
+        this.sz = 4;
     }
 
     /**
-     * Adds more blank spaces to make room for the cursor if its beginning and ending locations are the same.
+     * Adds more blank spaces to make room for the cursor.
      */
     private void ensureCapacity() {
         if (arrow1 == arrow2) {
@@ -37,9 +36,7 @@ public class GapBuffer {
 
 
     /**
-     * 
      * Adds a character into b on array1's current position, moving arrow1 to the right.
-     * 
      * @param ch the character we are inserting into the array.
      */
     public void insert(char ch) {
@@ -49,9 +46,7 @@ public class GapBuffer {
     }
 
     /** 
-     * 
      * Deletes the character in b located to the left of arrow1.
-     * 
      */
     public void delete() {
         if (arrow1 != 0) {
@@ -61,9 +56,7 @@ public class GapBuffer {
     }
 
     /**
-     * 
      * Tells us what index position of s the cursor is currently on.
-     * 
      * @return the current index position of the cursor (arrow2).
      */
     public int getCursorPosition() {
@@ -72,9 +65,7 @@ public class GapBuffer {
 
 
     /**
-     * 
      * Moves the cursor to the right if possible on the array.
-     * 
      */
     public void moveLeft() {
         if (this.arrow1 > 0) {

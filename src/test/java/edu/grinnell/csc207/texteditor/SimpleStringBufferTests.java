@@ -12,7 +12,7 @@ import net.jqwik.api.constraints.IntRange;
 public class SimpleStringBufferTests {
     @Test
     public void test1() {
-        SimpleStringBuffer b = new SimpleStringBuffer("", 0, 0);
+        SimpleStringBuffer b = new SimpleStringBuffer();
         b.insert('a');
         b.insert('b');
         b.insert('c');
@@ -26,7 +26,7 @@ public class SimpleStringBufferTests {
 
     @Test
     public void test2() {
-        SimpleStringBuffer b = new SimpleStringBuffer("", 0, 0);
+        SimpleStringBuffer b = new SimpleStringBuffer();
         b.delete();
         b.moveLeft();
         b.insert('a');
@@ -41,7 +41,7 @@ public class SimpleStringBufferTests {
 
     @Test
     public void test3() {
-        SimpleStringBuffer b = new SimpleStringBuffer("", 0, 0);
+        SimpleStringBuffer b = new SimpleStringBuffer();
         b.insert('a');
         assertEquals('a', b.getChar(0));
         b.insert('b');
@@ -60,7 +60,7 @@ public class SimpleStringBufferTests {
 
     @Property
     public boolean IndexTest(@ForAll @IntRange(min = 0, max = 1000) int sz) {
-        SimpleStringBuffer b = new SimpleStringBuffer("", 0, 0);
+        SimpleStringBuffer b = new SimpleStringBuffer();
         int IndexSum = 0;
         b.insert('a');
         IndexSum += b.index;
