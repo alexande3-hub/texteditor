@@ -64,6 +64,42 @@ public class GapBufferTests {
     }
 
     @Test
+    public void helloExampleTest() {
+        SimpleStringBuffer buffer = new SimpleStringBuffer();
+        buffer.insert('h');
+        buffer.insert('e');
+        buffer.insert('l');
+        buffer.insert('l');
+        buffer.insert('o');
+        buffer.insert(' ');
+        buffer.insert('w');
+        buffer.insert('o');
+        buffer.insert('r');
+        buffer.insert('l');
+        buffer.insert('d');
+    
+        buffer.moveLeft();
+        buffer.moveLeft();
+        buffer.moveLeft();
+        buffer.moveLeft();
+        buffer.moveLeft();
+        buffer.moveLeft();
+        buffer.insert('!');
+    
+        buffer.moveLeft();
+        buffer.delete();
+        buffer.delete();
+        buffer.delete();
+        buffer.delete();
+        buffer.delete();
+    
+        buffer.insert('a');
+        buffer.insert('b');
+        buffer.insert('c');
+        assertEquals("abc! world", buffer.toString());
+    }
+
+    @Test
     public void test4() {
         GapBuffer b = new GapBuffer();
         b.insert('a');
