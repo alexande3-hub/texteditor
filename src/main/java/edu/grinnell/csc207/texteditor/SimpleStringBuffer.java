@@ -43,14 +43,16 @@ public class SimpleStringBuffer {
      * Deletes the character in s from the cursor's current position.
      */
     public void delete() {
-        if (this.sz != 0) {
+        if (this.sz > 0) {
             char[] sArray = this.s.toCharArray();
             for (int i = (index - 1); i < (sz - 1); i++) {
                 sArray[i] = sArray[i + 1];
             } this.s = String.valueOf(sArray);
             this.s = this.s.substring(0, (sz - 1));
             this.sz--;
-            moveLeft();
+            if (this.index > 0) {
+                moveLeft();
+            }
         }
     }
     
