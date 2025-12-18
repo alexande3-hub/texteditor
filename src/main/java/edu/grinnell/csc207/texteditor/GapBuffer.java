@@ -11,6 +11,7 @@ public class GapBuffer {
     public int arrow2 = 0;
     public int sz = 0;
     public int bufLength = 0;
+    public boolean[] c = {};
 
     /**
      * A constructor for the GapBuffer.
@@ -28,6 +29,7 @@ public class GapBuffer {
     private void ensureCapacity() {
         if (arrow1 == arrow2) {
             b = Arrays.copyOf(b, bufLength + 4);
+            c = Arrays.copyOf(c, bufLength + 4);
             if (arrow1 == 0 && bufLength == 0) {
                 arrow2 = 3;
                 bufLength = 4;
@@ -35,14 +37,20 @@ public class GapBuffer {
                 b[1] = ' ';
                 b[2] = ' ';
                 b[3] = ' ';
+                c[0] = false;
+                c[1] = false;
+                c[2] = false;
+                c[3] = false;
             } else {
                 this.arrow2 += 4;
                 this.bufLength += 4;
-                for (int i = arrow2; i < bufLength; i++) {
+                for (int i = bufLength - 1; i >= arrow2; i--) {
                     b[i] = b[i - 4];
+                    c[i] = c[i - 4];
                 }
                 for (int i = arrow1; i < arrow2; i++) {
                     b[i] = ' ';
+                    c[i] = false;
                 }
             }
         }
@@ -56,6 +64,7 @@ public class GapBuffer {
     public void insert(char ch) {
         ensureCapacity();
         b[arrow1] = ch;
+        c[arrow1] = true;
         arrow1++;
         sz++;
         ensureCapacity();
@@ -67,6 +76,7 @@ public class GapBuffer {
     public void delete() {
         if (arrow1 != 0) {
             b[arrow1 - 1] = ' ';
+            c[arrow1 - 1] = false;
             arrow1--;
             sz--;
         }
@@ -87,7 +97,9 @@ public class GapBuffer {
     public void moveLeft() {
         if (this.arrow1 > 0) {
             b[arrow2 - 1] = b[arrow1 - 1];
+            c[arrow2 - 1] = c[arrow1 - 1];
             b[arrow1 - 1] = ' ';
+            c[arrow1 - 1] = false;
             this.arrow1--;
             this.arrow2--;
         }
@@ -100,7 +112,9 @@ public class GapBuffer {
     public void moveRight() {
         if (this.arrow2 < (bufLength - 1)) {
             b[arrow1] = b[arrow2];
+            c[arrow1] = c[arrow2];
             b[arrow2] = ' ';
+            c[arrow2] = false;
             this.arrow1++;
             this.arrow2++;
         }
@@ -128,6 +142,13 @@ public class GapBuffer {
      * @return the string returned that holds the data.
      */
     public String toString() {
-        return String.valueOf(b);
+        String str = "";
+        for (int i = 0; i < arrow1; i++) {
+            str += b[i];
+        }
+        for (int i = arrow2; i < bufLength - 1; i++) {
+            str += b[i];
+        }
+        return str;
     }
 }
